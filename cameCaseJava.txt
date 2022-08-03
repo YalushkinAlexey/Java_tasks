@@ -1,0 +1,15 @@
+class Solution {
+  public static String camelCase(String input) {
+    String camelStr = "";
+		int startPos =0;
+		char [] array = input.toCharArray();
+		for(int i = 1; i < input.length(); i++) {
+			if (Character.isUpperCase(input.charAt(i)) ){
+				camelStr = camelStr + input.substring(startPos, i)+ " "; 
+        startPos = i;
+			}
+		}
+    camelStr = camelStr + input.substring(startPos, input.length());
+    return camelStr;
+  }
+}

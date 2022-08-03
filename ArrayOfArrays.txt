@@ -1,0 +1,43 @@
+Массив массивов
+
+Вам нужно написать метод, который возвращает длину отсутствующего массива.
+
+Пример:
+[[1, 2], [4, 5, 1, 1], [1], [5, 6, 7, 8, 9]] --> 3
+
+Если массив массивов имеет значение null/nil или пуст, метод должен возвращать 0.
+
+Когда массив в массиве нулевой или пустой, метод также должен возвращать 0!
+Всегда будет отсутствующий элемент, и его длина всегда будет между заданными массивами.
+
+
+
+
+import java.util.Arrays;
+public class Kata
+{
+  public static int getLengthOfMissingArray(Object[][] arrayOfArrays)
+  {
+    if (arrayOfArrays == null || arrayOfArrays.length < 1){return 0;}     	// Проверяю на null массив массивов
+    int [] ar = new int[arrayOfArrays.length];					// создаю массив для хранения длин внутренних массивов		
+
+    
+    for (int j = 0; j < arrayOfArrays.length; j++){				//
+        if (arrayOfArrays[j] == null){return 0;}				// проверяем на null внутренний массив[j]
+        if (arrayOfArrays[j].length < 1){return 0;}				
+        ar[j] =  arrayOfArrays[j].length;					// закинем в наш массив длину заданного внутреннего массива[j]
+    }
+    Arrays.sort(ar);								// наведем шороха на это садоводство
+    
+    int startValue = ar[0];							// дальше считаем сумму длин массивов
+    int endValue = ar[ar.length-1];
+    int sum = 0;
+    for (int i = startValue; i <= endValue; i++){				
+      sum += i;
+    }
+    
+    for (int i = 0; i < ar.length; i++){					// отнимая от суммы длин массивов - длину каждого, получаем длину пропавшего
+      sum -= ar[i];
+    }
+    return sum;
+  }
